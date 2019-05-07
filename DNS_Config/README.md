@@ -7,6 +7,6 @@ It uses the 'dialog' program to have a more user friendly interface, making it e
 
 # What do you need to use this software?
 - You will need the 'dialog' program installed on your machine.
-- Dialog is a program used to design user-friendly interfaces, with buttons and menus, from a Shell Script.
+Dialog is a program used to design user-friendly interfaces, with buttons and menus, from a Shell Script.
 
 # How to use it?
