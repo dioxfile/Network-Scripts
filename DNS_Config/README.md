@@ -24,6 +24,9 @@ To install it on Debian-based distributions simply use the command:<br/>
 To install it on Arch-based distributions simply use the command:<br/>
 `sudo pacman -S dialog`<br/>
 
+To install it on Red Hat-based distributions simply use the command:<br/>
+`sudo dnf install dialog`<br/>
+
 Execution permission to DNS_Config with the command<br/>
 `$sudo chmod +x DNS_Config.sh`<br/>
 
