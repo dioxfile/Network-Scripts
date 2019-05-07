@@ -19,13 +19,13 @@ If you have a return as:<br/>
 So you do not have the program installed<br/>
 
 To install it on Debian-based distributions simply use the command:<br/>
-`$sudo apt install dialog`<br/><br/>
+`$sudo apt install dialog`<br/>
 
 To install it on Arch-based distributions simply use the command:<br/>
-`sudo pacman -S dialog`<br/><br/>
+`sudo pacman -S dialog`<br/>
 
 Execution permission to DNS_Config with the command<br/>
-`$sudo chmod +x DNS_Config.sh`<br/><br/>
+`$sudo chmod +x DNS_Config.sh`<br/>
 
 After that you just run the program:<br/>
 `./DNS_config.sh`
