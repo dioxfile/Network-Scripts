@@ -15,7 +15,7 @@ Call the program by its terminal like command:<br/>
 `$dialog`<br/>
 
 If you have a return as:<br/>
-`$ Unknown command dialog`
+`$ Unknown command dialog`<br/>
 So you do not have the program installed<br/>
 
 To install it on Debian-based distributions simply use the command:<br/>
