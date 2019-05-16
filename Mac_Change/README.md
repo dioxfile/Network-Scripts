@@ -1,4 +1,4 @@
-# Mac change
+# Mac Change
 ![all text](https://github.com/dioxfile/Network-Scripts/raw/master/Mac_Change/QR_Mac.png)
 
 This code aims to configure the Mac quickly and easily.
