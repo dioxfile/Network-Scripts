@@ -27,7 +27,7 @@ To install it on Arch-based distributions simply use the command:<br/>
 To install it on Red Hat-based distributions simply use the command:<br/>
 `sudo dnf install dialog`<br/>
 
-Execution permission to DNS_Config with the command<br/>
+Execution permission to MAC.sh with the command<br/>
 `$sudo chmod +x Mac.sh`<br/>
 
 After that you just run the program:<br/>
