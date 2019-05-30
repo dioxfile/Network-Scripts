@@ -3,6 +3,8 @@
 
 This code aims to quickly and easily configure IPV4.
 
+You can add 'n' ips quickly and automated, thus speeding up your network configuration if you need multiple ips on the same machine.
+
 It uses the 'dialog' program to have a more user friendly interface, making it easier to use and thus reducing the chances of errors.
 
 This script is adapted for networks that use net-toos packages.
