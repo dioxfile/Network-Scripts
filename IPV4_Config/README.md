@@ -44,6 +44,6 @@ In case you need, execution permission to DNS_Config with the command<br/>
 `$sudo chmod +x rede_ipv4.sh`<br/>
 
 After that you just run the program: <br/>
-`sudo ./rede_ipv4.sh`
+`$sudo ./rede_ipv4.sh`
 
 
