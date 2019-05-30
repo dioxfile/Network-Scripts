@@ -40,7 +40,7 @@ Net-tools<br/>
 `$sudo dnf install net-tools`<br/>
 
 
-In case you need, execution permission to DNS_Config with the command<br/>
+In case you need, execution permission to IPV6_Config with the command<br/>
 `$sudo chmod +x rede_ipv6.sh`<br/>
 
 After that you just run the program: <br/>
