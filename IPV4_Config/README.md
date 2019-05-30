@@ -1,5 +1,5 @@
 # IPV4 Configuration
-![all text](https://github.com/dioxfile/Network-Scripts/raw/master/DNS_Config/DNS_Config.png)
+![all text](https://github.com/dioxfile/Network-Scripts/raw/master/IPV4_Config/rede_ipv4.png)
 
 This code aims to quickly and easily configure IPV4.
 
