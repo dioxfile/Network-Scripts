@@ -24,12 +24,19 @@ So you do not have the program installed<br/>
 
 To install it on Debian-based distributions simply use the command:<br/>
 `$sudo apt install dialog`<br/>
+Net-tools<br/>
+`$sudo apt install net-tools`<br/>
 
 To install it on Arch-based distributions simply use the command:<br/>
-`sudo pacman -S dialog`<br/>
+`$sudo pacman -S dialog`<br/>
+Net-tools<br/>
+`$sudo pacman -S net-tools`<br/>
 
 To install it on Red Hat-based distributions simply use the command:<br/>
-`sudo dnf install dialog`<br/>
+`$sudo dnf install dialog`<br/>
+Net-tools<br/>
+`$sudo dnf install net-tools`<br/>
+
 
 Execution permission to DNS_Config with the command<br/>
 `$sudo chmod +x rede_ipv4.sh`<br/>
