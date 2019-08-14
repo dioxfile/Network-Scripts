@@ -18,15 +18,15 @@ Firewal script that blocks and detects portscan and DoS by pinging (death ping).
 - 4 - verify log:<br/>
 `$tail -f /var/log/iptables.log`<br/>
 - 5 - log line example:<br/>
-    a) `PortScan Detection:
-    #Aug 13 16:49:13 diogenes-inspiron kernel: 
+    a) PortScan Detection:<br/>
+    `#Aug 13 16:49:13 diogenes-inspiron kernel: 
     #[11549.184256] WARNING PORTSCAN ATTACK!!!:IN=wlan0 
     #OUT= MAC=b0:10:41:fe:2d:2b:08:00:27:b5:8d:f4:08:00 
     #SRC=104.105.212.60 DST=113.167.9.21 LEN=40 TOS=0x00 
     #PREC=0x00 TTL=64 ID=0 DF PROTO=TCP SPT=443 DPT=59152 
     #WINDOW=0 RES=0x00 RST URGP=0` <br/><br/><br/>
-    b)`DEATH PING Detection:
-    #Aug 13 16:48:41 diogenes-inspiron kernel: 
+    b)DEATH PING Detection:<br/>
+    `#Aug 13 16:48:41 diogenes-inspiron kernel: 
     #[11517.279744] WARNING DEATH PING ATTACK!!!:IN=wlan0 
     #OUT= MAC=b0:10:41:fe:2d:2b:64:1c:67:f8:be:58:08:00 
     #SRC=113.167.9.40 DST=113.167.9.21 LEN=84 TOS=0x00 
