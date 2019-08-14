@@ -10,8 +10,11 @@ Firewal script that blocks and detects portscan and DoS by pinging (death ping).
 
 
 # How to use it?
+- 1 - insert this line: '*.=info  -/var/log/iptables.log' in /etc/rsyslog.d/50-default.conf<br/>
+- 2 - restart rsyslog: /etc/init.d/rsyslog<br/>
+- 3 - run firewall: sudo ./Firewall<br/>
+- 4 - verify log: tail -f /var/log/iptables.log<br/>
 
-`$dialog`<br/>
 
 If you have a return as:<br/>
 `$ Unknown command dialog`<br/>
