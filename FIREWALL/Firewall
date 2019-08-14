@@ -22,7 +22,7 @@
     #PREC=0x00 TTL=64 ID=12546 DF PROTO=ICMP TYPE=8 
     #CODE=0 ID=7488 SEQ=7
     
-#By have a beautiful time!!!!
+#By have a beautiful time!!!
 
 #Starting Firewall Setup    
 . /lib/lsb/init-functions
@@ -53,8 +53,8 @@ echo "Policies Default"
 
 echo "1" > /proc/sys/net/ipv4/ip_forward
 # Masquerading
-iptables -A FORWARD --in-interface enp0s3 -j ACCEPT
-
+iptables -A FORWARD --in-interface $NIC -j ACCEPT
+#iptables -t nat -A POSTROUTING -o $NIC -j MASQUERADE
 #Loopback local process
 iptables -A INPUT -i lo -j ACCEPT
 
@@ -66,21 +66,20 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -o $NIC -j ACCEPT
 #######------Protection against attacks and connection attempts----------###########
 
 # Rejecting ping (ping protection from death ping)
-iptables -I INPUT -p icmp -m icmp --icmp-type echo-request -j ICMPSCAN 
-iptables -A ICMPSCAN -m recent --set --name badicmp --rsource
-iptables -A ICMPSCAN -m recent --update --seconds 1 --hitcount 2 --name badicmp --rsource -j LOG --log-level 6 --log-prefix "WARNING DEATH PING ATTACK!!!:" 
-iptables -A ICMPSCAN -m recent --update --seconds 1 --hitcount 2 --name badicmp --rsource -j DROP
-iptables -A ICMPSCAN -m recent --update --seconds 1 --hitcount 1 --name badicmp --rsource -j ACCEPT
+iptables -I INPUT -p icmp -i $NIC -m icmp --icmp-type echo-request -j ICMPSCAN 
+iptables -A ICMPSCAN -i $NIC -m recent --set --name badicmp --rsource
+iptables -A ICMPSCAN -i $NIC -m recent --update --seconds 1 --hitcount 2 --name badicmp --rsource -j LOG --log-level 6 --log-prefix "WARNING DEATH PING ATTACK!!!:" 
+iptables -A ICMPSCAN -i $NIC -m recent --update --seconds 1 --hitcount 2 --name badicmp --rsource -j DROP
+iptables -A ICMPSCAN -i $NIC -m recent --update --seconds 1 --hitcount 1 --name badicmp --rsource -j ACCEPT
 
 # Protecting portscans
 # These rules add scanners to the portscan list, and log the attempt.
-iptables -A INPUT -p tcp -m multiport --dport 0:65535 -m recent --name portscan --set -j LOG --log-level 6 --log-prefix "WARNING PORTSCAN ATTACK!!!:"
-iptables -A INPUT -p tcp -m multiport --dport 0:65535 -m recent --name portscan --set -j DROP
+iptables -A INPUT -p tcp -i $NIC -m multiport --dport 0:65535 -m recent --name portscan --set -j LOG --log-level 6 --log-prefix "WARNING PORTSCAN ATTACK!!!:"
+iptables -A INPUT -p tcp -i $NIC -m multiport --dport 0:65535 -m recent --name portscan --set -j DROP
 # These rules add scanners to the portscan list, and log the attempt.
-iptables -A INPUT -p udp -m multiport --dport 0:65535 -m recent --name portscan --set -j LOG --log-level 6 --log-prefix "WARNING PORTSCAN ATTACK!!!:"
-iptables -A INPUT -p udp -m multiport --dport 0:65535 -m recent --name portscan --set -j DROP
+iptables -A INPUT -p udp -i $NIC -m multiport --dport 0:65535 -m recent --name portscan --set -j LOG --log-level 6 --log-prefix "WARNING PORTSCAN ATTACK!!!:"
+iptables -A INPUT -p udp -i $NIC -m multiport --dport 0:65535 -m recent --name portscan --set -j DROP
 
-iptables -A INPUT -p tcp --dport 22 -i $NIC -j ACCEPT
 # Block Invalid (INVALID) CONNECTIONS
 iptables -A INPUT -m state --state INVALID -i $NIC -j LOG --log-level 6 --log-prefix "firewall invalid: -i"
 iptables -A FORWARD -m state --state INVALID -o $NIC -j LOG --log-level 6 --log-prefix "firewall invalid -o:"
@@ -88,9 +87,9 @@ iptables -A INPUT -m state --state INVALID -i $NIC -j DROP
 iptables -A FORWARD -m state --state INVALID -o $NIC -j DROP
 
 #Log synchronization attempts for new external TCP connections
-iptables -A FORWARD -p tcp ! --syn -m state --state NEW -j LOG --log-level 6 --log-prefix "firewall new syn:" 
+iptables -A FORWARD -p tcp -o $NIC ! --syn -m state --state NEW -j LOG --log-level 6 --log-prefix "firewall new syn:" 
 #Blocking requests for external connections. Locks everything except what was specified.
-iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+iptables -A INPUT -p tcp -i $NIC ! --syn -m state --state NEW -j DROP
 }
 
 parar(){
