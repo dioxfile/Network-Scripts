@@ -2,7 +2,7 @@
 
 # Instructions:
  # 1 - insert this line: '*.=info  -/var/log/iptables.log' in /etc/rsyslog.d/50-default.conf
- # 2 - restart rsyslog: /etc/init.d/rsyslog
+ # 2 - restart rsyslog: /etc/init.d/rsyslog restart
  # 3 - run firewall: sudo ./Firewall
  # 4 - verify log: tail -f /var/log/iptables.log
  # 5 - log line example: 
