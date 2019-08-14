@@ -1,5 +1,5 @@
-# Firewalln
-![all text](https://github.com/dioxfile/Network-Scripts/raw/master/DNS_Config/DNS_Config.png)
+# Firewall
+![all text](https://github.com/dioxfile/Network-Scripts/raw/master/FIREWALL/Firewall.png)
 
 Firewal script that blocks and detects portscan and DoS by pinging (death ping).
 
