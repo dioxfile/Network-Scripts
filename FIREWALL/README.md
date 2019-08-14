@@ -3,18 +3,15 @@
 
 Firewal script that blocks and detects portscan and DoS by pinging (death ping).
 
-
-
 # What do you need to use this software?
 - You will need <br/>
  IPTables;<br/>
  Net-tools.
 
-
 # How to use it?
-- 1 - insert this line: `'*.=info  -/var/log/iptables.log' in /etc/rsyslog.d/50-default.conf`<br/>
+- 1 - insert this line (without the quotes): `'*.=info  -/var/log/iptables.log' in /etc/rsyslog.d/50-default.conf`<br/>
 - 2 - restart rsyslog:<br/>
-`$/etc/init.d/rsyslog`<br/>
+`$sudo /etc/init.d/rsyslog`<br/>
 - 3 - run firewall:<br/>
 `$sudo ./Firewall`<br/>
 - 4 - verify log:<br/>
