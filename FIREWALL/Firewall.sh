@@ -22,7 +22,7 @@
     #PREC=0x00 TTL=64 ID=12546 DF PROTO=ICMP TYPE=8 
     #CODE=0 ID=7488 SEQ=7
     
-#By have a beautiful time!!!
+#By have a beautiful time!!!!
 
 #Starting Firewall Setup    
 . /lib/lsb/init-functions
