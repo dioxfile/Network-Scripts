@@ -14,24 +14,11 @@ Firewal script that blocks and detects portscan and DoS by pinging (death ping).
 - 2 - restart rsyslog: /etc/init.d/rsyslog<br/>
 - 3 - run firewall: sudo ./Firewall<br/>
 - 4 - verify log: tail -f /var/log/iptables.log<br/>
-
-
-If you have a return as:<br/>
-`$ Unknown command dialog`<br/>
-So you do not have the program installed<br/>
-
-To install it on Debian-based distributions simply use the command:<br/>
-`$sudo apt install dialog`<br/>
-
-To install it on Arch-based distributions simply use the command:<br/>
-`sudo pacman -S dialog`<br/>
-
-To install it on Red Hat-based distributions simply use the command:<br/>
-`sudo dnf install dialog`<br/>
-
-Execution permission to DNS_Config with the command<br/>
-`$sudo chmod +x DNS_Config.sh`<br/>
-
-After that you just run the program:<br/>
-`./DNS_config.sh`
-
+- 5 - log line example:<br/>
+    `#a) PortScan Detection:
+    #Aug 13 16:49:13 diogenes-inspiron kernel: 
+    #[11549.184256] WARNING PORTSCAN ATTACK!!!:IN=wlan0 
+    #OUT= MAC=b0:10:41:fe:2d:2b:08:00:27:b5:8d:f4:08:00 
+    #SRC=104.105.212.60 DST=113.167.9.21 LEN=40 TOS=0x00 
+    #PREC=0x00 TTL=64 ID=0 DF PROTO=TCP SPT=443 DPT=59152 
+    #WINDOW=0 RES=0x00 RST URGP=0`
