@@ -7,7 +7,7 @@ IF errorlevel=1 goto FIXO
 :FIXO
 set /p INTERFACE=Nome da Interface--^>
 set /p IP=Ipv6--^>
-set /p GATEWAY=Gw--(Ex. FD00::/7)^>
+set /p GATEWAY=Gw (Ex. FD00::/7)--^>
 set /p DNS=Dns--^>
 set /p DNS2=Dns2--^>
  netsh interface ipv6 add address interface="%INTERFACE%" address=%IP%
@@ -20,15 +20,14 @@ goto :FIM
 :AUTOMATICO 
 ipconfig /renew6
 ipconfig /release6
-netsh interface ipv6 delete dnsserver "Rede" all
-netsh interface ipv6 set int interface="Rede" advertise=enable managed=enabled
+netsh interface ipv6 delete dnsserver "%INTERFACE%" all
+netsh interface ipv6 set int interface="%INTERFACE%" advertise=enable managed=enabled
 goto :FIM
 
 :FIM
 @echo Finished
 ipconfig
-netsh interface ipv6 show dns "Rede"
-netsh interface ipv6 show address "Rede"
-
+netsh interface ipv6 show dns "%INTERFACE%"
+netsh interface ipv6 show address "%INTERFACE%"
 
 
