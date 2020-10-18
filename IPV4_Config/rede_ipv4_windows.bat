@@ -15,9 +15,9 @@ netsh int ip set dns name="%INTERFACE%" static %DNS%
 goto :FIM
 
 :AUTOMATICO 
-netsh int ip delete dns name="Rede" all
-netsh int ip set address name="Rede" source=dhcp
-netsh int ip set dns name="Rede" dhcp
+netsh int ip delete dns name="%INTERFACE%" all
+netsh int ip set address name="%INTERFACE%" source=dhcp
+netsh int ip set dns name="%INTERFACE%" dhcp
 goto :FIM
 
 :FIM
