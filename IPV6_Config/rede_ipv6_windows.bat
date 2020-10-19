@@ -27,4 +27,4 @@ goto :FIM
 
 :FIM
 @echo Finished
-ipconfig
+ipconfig /all
