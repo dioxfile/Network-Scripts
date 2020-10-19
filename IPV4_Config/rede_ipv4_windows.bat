@@ -15,6 +15,7 @@ netsh int ip set dns name="%INTERFACE%" static %DNS%
 goto :FIM
 
 :AUTOMATICO 
+FOR /F "tokens=3,*" %%A IN ('netsh interface show interface^|find "Connected"') DO (set INTERFACE=%%B)
 netsh int ip delete dns name="%INTERFACE%" all
 netsh int ip set address name="%INTERFACE%" source=dhcp
 netsh int ip set dns name="%INTERFACE%" dhcp
