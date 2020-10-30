@@ -9,6 +9,6 @@ Dialog is a program used to design user-friendly interfaces, with buttons and me
 Iptables is a known firewall for Linux Systems, default in kernel Linux.<br/>
 
 # How to use it?
-Only run it in Terminal: 
+Only run it in Terminal and answer whatever is asked: 
 `$ sudo ./Iptables_Internet_Share.sh`<br/>
 
