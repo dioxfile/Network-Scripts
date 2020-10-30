@@ -1,5 +1,5 @@
 # Internet Connection Shared with Iptables
-![all text](https://github.com/dioxfile/Network-Scripts/raw/master/Iptables_Share_Internet/)
+![all text](https://github.com/dioxfile/Network-Scripts/raw/master/Iptables_Share_Internet/inter_share.png)
 
 This code aims to quickly and easily share your Internet connection.
 
