@@ -1,7 +1,6 @@
 
 # Generic Firewall
-![image](https://github.com/dioxfile/Network-Scripts/raw/master/Generic_Firewall/frame.png)
-<img src="https://github.com/dioxfile/Network-Scripts/raw/master/Generic_Firewall/frame.png" width="100" height="100">
+<img src="https://github.com/dioxfile/Network-Scripts/raw/master/Generic_Firewall/frame.png" width="250" height="250">
 
 # This script does the following:
 ## 1 - Shares the Internet with a single network interface;<br/>
