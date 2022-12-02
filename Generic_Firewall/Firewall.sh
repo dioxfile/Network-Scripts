@@ -119,6 +119,7 @@ echo "Todas as regras LIMPAS"
 iptables -P INPUT DROP      &&
 iptables -P FORWARD ACCEPT  &&
 iptables -P OUTPUT ACCEPT   &&
+iptables -N ICMPSCAN        &&
 echo "Policies Default"
 
 ###Zerando as regras
@@ -136,9 +137,6 @@ echo "Todas as regras LIMPAS"
 echo "Policies Default"
 
 #Habilitando o roteamento/encaminhamento
-EXTIF=$1
-INTIF=$2
-WLAN_NET="192.168.10.0/24"
 echo "1" > /proc/sys/net/ipv4/ip_forward
 # Flush all rules
 iptables -F
@@ -156,12 +154,12 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -i $NIC -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -o $NIC -j ACCEPT
 
 #######-------------------Proteções contra ataques e tentativas de conexões----------###########
-
-# Rejeitando ping (proteção contra ping da morte)
-iptables -A INPUT -p icmp --icmp-type echo-request -j LOG --log-level 6 --log-prefix "firewall ping echo-request DEAD:"
-#A regra a seguir limita em 1 vez por segundo (--limit 1/s) a passagem de pings (echo requests) para a máquina Linux.
-iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s -j ACCEPT
-#iptables -A INPUT -p icmp --icmp-type echo-reply -m limit --limit 1/s -j ACCEPT
+# Rejecting ping (ping protection from death ping)
+iptables -I INPUT -p icmp -i $NIC -m icmp --icmp-type echo-request -j ICMPSCAN 
+iptables -A ICMPSCAN -i $NIC -m recent --set --name badicmp --rsource
+iptables -A ICMPSCAN -i $NIC -m recent --update --seconds 1 --hitcount 2 --name badicmp --rsource -j LOG --log-level 6 --log-prefix "WARNING DEATH PING ATTACK!!!:" 
+iptables -A ICMPSCAN -i $NIC -m recent --update --seconds 1 --hitcount 2 --name badicmp --rsource -j DROP
+iptables -A ICMPSCAN -i $NIC -m recent --update --seconds 1 --hitcount 1 --name badicmp --rsource -j ACCEPT
 #Proteção contra port scanners ocultos
 iptables -A FORWARD -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s -j ACCEPT
 
