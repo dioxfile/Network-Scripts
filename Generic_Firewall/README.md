@@ -5,9 +5,7 @@
 ## 1 - Shares the Internet with a single network interface;<br/>
 ## 2 - Makes secure access to SSH through knocking on the door;<br/>
 ## 3 - Use ToS;<br/>
-## 4 - Automatically capture the network card, netmask, and network. 
-
-## OBS: After that apply these settings to Firewall, etc.<br/>
+## 4 - Automatically capture the network card, netmask, and network. After that apply these settings to Firewall, etc.<br/>
 
 ## Firewal script too blocks DoS by pinging (death ping).
 
