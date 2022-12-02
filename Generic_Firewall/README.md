@@ -1,16 +1,16 @@
 
 # Firewall
 ![all text](https://github.com/dioxfile/Network-Scripts/raw/master/FIREWALL/Firewall.png)
-## This script does the following:
-# 1 - Shares the Internet with a single network interface;<br/>
-# 2 - Makes secure access to SSH through knocking on the door;<br/>
-# 3 - Use ToS;<br/>
-# 4 - Automatically capture the network card, netmask, and network. 
-# After that apply these settings to Firewall, etc.<br/>
+# This script does the following:
+## 1 - Shares the Internet with a single network interface;<br/>
+## 2 - Makes secure access to SSH through knocking on the door;<br/>
+## 3 - Use ToS;<br/>
+## 4 - Automatically capture the network card, netmask, and network. 
+## After that apply these settings to Firewall, etc.<br/>
 
 ## Firewal script that blocks and detects portscan and DoS by pinging (death ping).
 
-
+# EXAMPLE OF USE:
 # What do you need to use this software?
 - You will need <br/>
  IPTables;<br/>
