@@ -87,9 +87,9 @@
 #export NIC=$(route -n | egrep "0.0.0.0" | egrep "UG" | awk '{print $8}') #Gateway
 export NIC=$(route -n | egrep "0.0.0.0" | awk '{print $8}' | sort -u)     #with or without GW
 #export NIC=$(route -n | egrep "UG" | awk '{print $8}')                   #No Gateway
-
-#export MASK=$(ifconfig $NIC | egrep "Masc:" | awk -F"Masc:" '{print $2}')
-#export LAN=$(route -n | egrep $MASK | cut -d " " -f1)/$MASK
+#export EXGW=$(route -n | egrep "UG" | awk '{print $2}')                   #Get Gateway
+export MASK=$(ifconfig $NIC | egrep "netmask" | awk -F"netmask" '{print $2}' | awk  'END {print $1}')
+export LAN=$(route -n | egrep $MASK | cut -d " " -f1)/$MASK
 #export LAN=0/0
 #export MEUIP=$(ifconfig $NIC | egrep "inet end:" | cut -d " " -f12 | cut -d ":" -f2)/255.255.255.255
 ################################################## END ########################################
@@ -134,15 +134,18 @@ echo "Todas as regras LIMPAS"
 #ip6tables -P FORWARD ACCEPT  &&
 #ip6tables -P OUTPUT ACCEPT   &&
 echo "Policies Default"
-#ip6tables -A INPUT -m pkttype --pkt-type multicast -j ACCEPT
+
 #Habilitando o roteamento/encaminhamento
+EXTIF=$1
+INTIF=$2
+WLAN_NET="192.168.10.0/24"
 echo "1" > /proc/sys/net/ipv4/ip_forward
-# Masquerading
-#iptables -A FORWARD --in-interface wlan0 -j ACCEPT
-iptables -t nat -A POSTROUTING -o $NIC -j MASQUERADE
-#iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-
-
+# Flush all rules
+iptables -F
+#Allow masquerade only if requested internet address
+iptables -A POSTROUTING -s $LAN ! -d $LAN -o $NIC -j MASQUERADE
+#Allow forward from localnet to internet
+iptables -A FORWARD -s $LAN  ! -d $LAN  -i $NIC -j ACCEPT
 
 #Liberacao do Loopback para processos locais
 iptables -A INPUT -i lo -j ACCEPT
@@ -209,6 +212,7 @@ echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
 # Liberando Serviços
 #iptables -A INPUT -p tcp -i $NIC -m multiport --dport 80,443 -j ACCEPT
 #iptables -A INPUT -p tcp -i $NIC --dport 36100 -j ACCEPT # Squid
+iptables -A INPUT -p tcp -i $NIC -m multiport --dport 22,22022 -j  LOG --log-level 6 --log-prefix "firewall ping echo-request DEAD:"
 #iptables -A INPUT -p tcp -i $NIC -m multiport --dport 22,22022 -j ACCEPT # SSH
 #iptables -A INPUT -p tcp -i $NIC  --dport 67 -j ACCEPT # DHCP Server
 #iptables -A INPUT -p udp --dport 67 -j ACCEPT # DHCP Server
@@ -220,8 +224,6 @@ echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
 #iptables -A INPUT -p tcp -i $NIC -m multiport --dport 21,20,21021 -j ACCEPT # FTP
 iptables -A INPUT -p udp -i $NIC -m multiport --dport 137,138 -j ACCEPT # Samba udp
 iptables -A INPUT -p tcp -i $NIC -m multiport --dport 139,445 -j ACCEPT # Samba tcp
-ip6tables -A INPUT -p udp -i $NIC -m multiport --dport 100-200 -j ACCEPT # Samba udp
-ip6tables -A INPUT -p tcp -i $NIC -m multiport --dport 100-500 -j ACCEPT # Samba tcp
 #iptables -A INPUT -p udp -i $NIC -m multiport --dport 80,3838,1024,909,9090:9100,21355 -j ACCEPT
 #iptables -A INPUT -p udp -i $NIC -m multiport --dport 0:65535 -j ACCEPT # Jgroups
 #socket_python
