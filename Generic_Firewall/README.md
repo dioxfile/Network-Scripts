@@ -1,6 +1,6 @@
 
 # Generic Firewall
-![all text](https://github.com/dioxfile/Network-Scripts/raw/master/Generic_Firewall/frame.png = 250x250)
+![all text](https://github.com/dioxfile/Network-Scripts/raw/master/Generic_Firewall/frame.png)
 # This script does the following:
 ## 1 - Shares the Internet with a single network interface;<br/>
 ## 2 - Makes secure access to SSH through knocking on the door;<br/>
