@@ -1,5 +1,5 @@
 
-# Firewall
+# Generic Firewall
 ![all text](https://github.com/dioxfile/Network-Scripts/raw/master/FIREWALL/Firewall.png)
 # This script does the following:
 ## 1 - Shares the Internet with a single network interface;<br/>
