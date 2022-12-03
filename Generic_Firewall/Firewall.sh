@@ -122,24 +122,8 @@ iptables -P OUTPUT ACCEPT   &&
 iptables -N ICMPSCAN        &&
 echo "Policies Default"
 
-###Zerando as regras
-#ip6tables -F         &&
-
-#ip6tables -F INPUT   &&
-#ip6tables -F OUTPUT  &&
-#ip6tables -F FORWARD &&
-echo "Todas as regras LIMPAS"
-             
-#Mudando Políticas - primeiro bloqueia-se tudo para então liberar apenas o que é necessário.
-#ip6tables -P INPUT DROP      &&
-#ip6tables -P FORWARD ACCEPT  &&
-#ip6tables -P OUTPUT ACCEPT   &&
-echo "Policies Default"
-
 #Habilitando o roteamento/encaminhamento
 echo "1" > /proc/sys/net/ipv4/ip_forward
-# Flush all rules
-iptables -F
 #Allow masquerade only if requested internet address
 iptables -A POSTROUTING -s $LAN ! -d $LAN -o $NIC -j MASQUERADE
 #Allow forward from localnet to internet
@@ -210,7 +194,7 @@ echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
 # Liberando Serviços
 #iptables -A INPUT -p tcp -i $NIC -m multiport --dport 80,443 -j ACCEPT
 #iptables -A INPUT -p tcp -i $NIC --dport 36100 -j ACCEPT # Squid
-iptables -A INPUT -p tcp -i $NIC -m multiport --dport 22,22022 -j  LOG --log-level 6 --log-prefix "firewall ping echo-request DEAD:"
+iptables -A INPUT -p tcp -i $NIC -m multiport --dport 22,22022 -j  LOG --log-level 6 --log-prefix "Acessando SSH - ACCEPT:"
 #iptables -A INPUT -p tcp -i $NIC -m multiport --dport 22,22022 -j ACCEPT # SSH
 #iptables -A INPUT -p tcp -i $NIC  --dport 67 -j ACCEPT # DHCP Server
 #iptables -A INPUT -p udp --dport 67 -j ACCEPT # DHCP Server
@@ -271,7 +255,7 @@ iptables -t mangle -A PREROUTING -p tcp -m multiport --dport 20 -j TOS --set-tos
 
 #                                  Minimum delay portas SSH e HTTP
 iptables -t mangle -A INPUT -i $NIC -m multiport -p tcp --dport 21,80,443,22022 -j TOS --set-tos 0x08 # HTTP,HTTPS,SSH,MSN
-iptables -t mangle -A PREROUTING -p tcp -m multiport --dport 21,1863,22022,80,443 -j TOS --set-tos 0x08 # SSH, HTTP, HTTPS 
+iptables -t mangle -A PREROUTING -p tcp -m multiport --dport 21,22022,80,443 -j TOS --set-tos 0x08 # SSH, HTTP, HTTPS 
 
 ## NAT ##
 # Redirecionamento de porta para o servidor proxy
