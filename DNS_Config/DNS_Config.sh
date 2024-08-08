@@ -1,19 +1,21 @@
 #!/bin/sh
+Number=$( dialog --stdout --inputbox 'Insira o Nº de DNS Servers:'    0 0 )
+echo "# DNS gravado por DNS_Config - By dioxfile Unemat Barra do Bugres." > /etc/resolv.conf
 
-DNS=$( dialog --stdout --inputbox 'Enter Primary DNS:'    0 0 )
-DNS2=$( dialog --stdout --inputbox 'Enter Secondary DNS:'    0 0 )
-
-echo "# DNS recorded by DNS_Config - By dioxfile Unemat Barra do Bugres." > /etc/resolv.conf
+for i in $(seq 1 $Number);
+do
+DNS=$( dialog --stdout --inputbox "Insira o DNS '$i':"    0 0 )
 echo nameserver $DNS >> /etc/resolv.conf
-echo nameserver $DNS2 >> /etc/resolv.conf
-echo "#                      End of Archive resolv.conf" >> /etc/resolv.conf
+done;
+echo "#                      Fim do Arquivo resolv.conf" >> /etc/resolv.conf
 dialog \
---title 'WARNING' \
---msgbox 'Make sure everything is OK with DNS and Be Happy...' \
+--title 'AVISO' \
+--msgbox 'Verifique se Está tudo Certo com o DNS e Seja Feliz...' \
 6 40
 dialog \
---title 'File Contents resolv.conf'  \
+--title 'Conteúdo do Arquivo resolv.conf'  \
 --textbox /etc/resolv.conf \
 0 0
+#/etc/init.d/Firewall restart
 dig
-reset 
+reset
